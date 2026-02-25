@@ -1,0 +1,20 @@
+services:
+  telegram-bot:
+    build: .
+    container_name: vivian_points_bot
+    env_file:
+      - .env
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - API_BASE_URL=${API_BASE_URL}
+      - API_USERNAME=${API_USERNAME}
+      - API_PASSWORD=${API_PASSWORD}
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    driver: bridge
